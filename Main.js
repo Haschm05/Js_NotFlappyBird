@@ -2,6 +2,7 @@ let bird;
 let pipes;
 let distBetween;
 let nextSpawn;
+let isGameOver = false;
 
 function setup() {
   createCanvas(600, 400);
@@ -20,6 +21,11 @@ function draw() {
   for (let i = pipes.length - 1; i >= 0; i--) {
     pipes[i].update();
     pipes[i].show();
+    
+    if (pipes[i].hits(bird)) {
+      isGameOver = true;
+      noLoop();
+    }
   }
   
   bird.update();
@@ -87,5 +93,15 @@ class Pipe {
     this.x -= this.speed;
   }
   
+  hits(bird) {
+    if (bird.y < this.top || bird.y > height - this.bottom) {
+      if (bird.x > this.x && bird.x < this.x +this.width) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
+
+
 
