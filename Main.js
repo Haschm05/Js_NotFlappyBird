@@ -1,12 +1,27 @@
 let bird;
+let pipes;
+let distBetween;
+let nextSpawn;
 
 function setup() {
   createCanvas(600, 400);
+  distBetween = width / 3;
+  nextSpawn = random(distBetween, width - (width / 4));
+  pipes = [new Pipe()];
   bird = new Bird(64, height / 2);
 }
 
 function draw() {
   background('lightblue');
+  
+  if (pipes.length <= 0 || width - pipes[pipes.length - 1].x >= nextSpawn) {
+    pipes.push(new Pipe());
+  }
+  for (let i = pipes.length - 1; i >= 0; i--) {
+    pipes[i].update();
+    pipes[i].show();
+  }
+  
   bird.update();
   bird.show();
 }
@@ -50,3 +65,27 @@ class Bird {
     this.velocity += this.lift;
   }
 }
+
+class Pipe {
+  constructor() {
+    this.spacing = 140;
+    this.top = random(height / 6, height / 2);
+    this.bottom = height - (this.top + this.spacing)
+    this.x = width;
+    this.width = 60;
+    this.speed = 3;
+    this.pastBird = false;
+  }
+  
+  show() {
+    fill('green')
+    rect(this.x, 0, this.width, this.top);
+    rect(this.x, height - this.bottom, this.width, this.bottom);
+  }
+  
+  update() {
+    this.x -= this.speed;
+  }
+  
+}
+
