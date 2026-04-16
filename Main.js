@@ -3,6 +3,7 @@ let pipes;
 let distBetween;
 let nextSpawn;
 let isGameOver = false;
+let score =0;
 
 function setup() {
   createCanvas(600, 400);
@@ -26,16 +27,28 @@ function draw() {
       isGameOver = true;
       noLoop();
     }
+    
+    if(!pipes[i].pastBird && pipes[i].checkIfPastBird(bird)) {
+      score ++;
+    }
   }
   
   bird.update();
   bird.show();
+  drawScore();
 }
 
 function keyPressed() {
   if (key == " ") {
     bird.flap();
   }
+}
+
+function drawScore() {
+  fill(0);
+  textSize(20);
+  textAlign(LEFT);
+  text("Score " + score, 10, 30);
 }
 
 class Bird {
@@ -98,6 +111,14 @@ class Pipe {
       if (bird.x > this.x && bird.x < this.x +this.width) {
         return true;
       }
+    }
+    return false;
+  }
+  
+  checkIfPastBird(bird) {
+    if (!this.pastBird && this.x + this.width < bird.x) {
+      this.pastBird = true;
+      return true;
     }
     return false;
   }
