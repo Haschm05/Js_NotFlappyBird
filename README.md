@@ -1,6 +1,6 @@
 # Js_NotFlappyBird
 
-A JavaScript based ~Flappy Bird~ script. As a script developed during a club meeting it's not very complicated and is meant to be more of a "Hey cool" program than a serious, developed project.
+A JavaScript based ~Flappy Bird~ script. As a script developed during an Association of Computing Machinery (ACM) club meeting as a group. The code is not very complicated and is meant to be more of a "Hey cool" program than a serious, developed project.
 
 ---
 
@@ -11,7 +11,7 @@ I recommend copying the script from the main file and pasting it into your JS ID
 ---
 
 ## Running
-
+Will add eventually, Trust
 
 ---
 
